@@ -1,5 +1,4 @@
-# Exploration Of Tensorflow X Keras Model Performance
-## Utilizing Cifar-10 & Deep Learning Techniques
+# Exploration Of Tensorflow X Keras Model Performance Utilizing Cifar-10 & Deep Learning Techniques
 
 This project demonstrates image classification on the CIFAR-10 dataset using TensorFlow and Keras. It includes code for data preprocessing, model building, training, evaluation, and visualization of results.
 ## Installation
