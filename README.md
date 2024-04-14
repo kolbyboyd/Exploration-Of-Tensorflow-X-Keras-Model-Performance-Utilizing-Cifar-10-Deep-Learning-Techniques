@@ -502,9 +502,6 @@ print('Test Accuracy:', test_accuracy)
 
 ## Conclusion
 
-This project demonstrates the complete workflow of image classification using TensorFlow and Keras on the CIFAR-10 dataset. 
-By following this example, users can understand how to build, train, evaluate, and visualize CNN models for image classification tasks. 
-Future work may involve experimenting with different architectures, optimization techniques, and datasets for further improvement.
 This project provides a comprehensive demonstration of image classification using TensorFlow and Keras on the CIFAR-10 dataset. Through the detailed code explanations and examples, users can gain a deep understanding of various stages of the machine learning pipeline, including data preprocessing, model building, training, evaluation, and visualization.
 
 By following the examples and guidelines presented in this documentation, users can leverage TensorFlow and Keras to develop and train their own image classification models on different datasets. The flexibility of the code allows for easy experimentation with different architectures, hyperparameters, and optimization techniques, empowering users to adapt the workflow to their specific use cases.
