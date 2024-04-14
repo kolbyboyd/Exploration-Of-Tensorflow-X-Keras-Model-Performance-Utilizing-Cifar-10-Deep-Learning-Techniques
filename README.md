@@ -11,7 +11,6 @@ This project demonstrates image classification on the CIFAR-10 dataset using Ten
 !pip install matplotlib
 ```
 
-#### Next, we need to import everything we will need for successful training.
 ## Importing Necessary Libraries
 
 #### Before we begin training our model, we need to import essential libraries that will be used throughout the process. Each library serves a specific purpose in data preprocessing, model building, training, evaluation, and visualization.
@@ -52,7 +51,6 @@ from keras.utils import to_categorical
 from sklearn.metrics import confusion_matrix, classification_report
 ```
 
-#### We chose to use the CIFAR-10 dataset.
 ## Loading the CIFAR-10 Dataset
 
 #### The CIFAR-10 dataset is a widely used benchmark dataset for image classification tasks. It consists of 60,000 32x32 color images in 10 classes, with 6,000 images per class.
@@ -65,7 +63,6 @@ from sklearn.metrics import confusion_matrix, classification_report
 (x_train, y_train), (x_test, y_test) = cifar10.load_data()
 ```
 
-#### After loading the dataset, let's visualize a few random images from your dataset to understand its content and overall quality.
 ## Visualizing Sample Images from the Dataset
 
 #### Visualization of sample images from the dataset serves as an initial exploration step to gain insights into the data's characteristics and quality. Understanding the dataset's content can help in making informed decisions during model development and preprocessing.
@@ -90,7 +87,6 @@ for i in range(9):
 plt.show()
 ```
 
-#### Then, let's check the shape of the data to confirm the number of images and their dimensions.
 ## Checking the Shape and Class Distribution of the Dataset
 
 #### After loading the dataset, it's crucial to inspect its shape and class distribution to understand the data's structure and balance. This step helps ensure that the dataset is properly loaded and provides insights into potential biases or imbalances that may impact model training.
@@ -117,8 +113,6 @@ print('Class Distribution (Top 10):')
 print(Counter(np.argmax(y_train, axis=1)).most_common(10))
 ```
 
-## Image Preprocessing
-#### First, let's normalize the pixel values of the images.
 ## Image Preprocessing: Normalizing Pixel Values
 
 #### Before feeding the images into the neural network model, it's essential to preprocess them to ensure uniformity and enhance model convergence. One common preprocessing step is normalization, where the pixel values of the images are scaled to a standard range.
@@ -139,7 +133,6 @@ x_train = x_train.astype('float32') / 255.0
 x_test = x_test.astype('float32') / 255.0
 ```
 
-#### Next, resize images to a consistent size for model input.
 ## Image Preprocessing: Resizing Images
 
 #### Resizing images to a consistent size is a crucial preprocessing step in image classification tasks, ensuring uniformity in input dimensions across all images. In this code snippet, we perform resizing of images to prepare them for model input.
@@ -168,14 +161,6 @@ train_dataset = train_dataset.batch(batch_size).map(lambda x: tf.image.resize(x,
 test_dataset = test_dataset.batch(batch_size).map(lambda x: tf.image.resize(x, (128, 128)))
 ````
 
-## Data Augmentation
-#### We'll begin with some basic parameters.
-- ##### Experiment with Parameters: The code below has some example data augmentation parameters. Try changing the values within these parameters, or even adding new augmentation techniques! Here's a short guide:
-- ##### Hint 1: Start with small adjustments to see the effects clearly.
-- ##### Hint 2: Consider which augmentations make sense for your dataset. Flipping images of letters might be okay, but rotating them too much could make them unreadable!
-- ##### Explore more: Try adding things like shear_range (for shearing transformations) or zoom_range (for random zooming).
-- ##### Visualize the Effects: After setting up your ImageDataGenerator, add a few lines of code to display some randomly augmented images from your dataset. This will help you see how your chosen parameters change the images.
-- ##### Hint: Use a small sample of images so it's easy to compare the originals with the augmented versions.
 ## Data Augmentation: Enhancing Dataset Diversity
 
 #### Data augmentation is a crucial technique employed in training deep learning models to increase the diversity and robustness of the dataset. By applying various transformations to the existing images, we can create new training examples, thereby reducing overfitting and improving generalization performance.
@@ -201,7 +186,6 @@ datagen = ImageDataGenerator(
 datagen.fit(x_train)
 ```
 
-#### Now, let's build the model.
 ## Model Building: Constructing the Convolutional Neural Network (CNN)
 
 #### The model building stage involves creating a convolutional neural network (CNN) architecture for image classification. Key steps and components of this section include:
@@ -231,7 +215,6 @@ model = Sequential([
 ])
 ````
 
-#### Compile.
 ## Compilation: Configuring the Model for Training
 
 #### The compilation step involves configuring the model for the training process. Key aspects of this stage include:
@@ -245,7 +228,6 @@ model = Sequential([
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 ````
 
-#### Mark a checkpoint.
 ## Model Checkpointing: Saving the Best Model Automatically
 
 #### ModelCheckpoint is a callback function in Keras that automatically saves the model's weights during training. Key attributes include:
@@ -260,7 +242,6 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 checkpoint = ModelCheckpoint('best_model.h5', save_best_only=True, monitor='val_loss', mode='min', verbose=1)
 ````
 
-#### History, Model Fit
 ## Model Training: Training the Model with Data Augmentation
 
 #### The `fit` method in Keras is used to train the model on the training data. Key parameters include:
@@ -280,13 +261,6 @@ history = model.fit(
 )
 ````
 
-## Model Training
-#### Enhanced Training
-- ##### Implement data augmentation within the training loop. Add callbacks to monitor progress and save the best performing model. Modify the Training Code: If you haven't already, we need to make a few changes to your training loop:
-- ##### Integrate the Data Augmentation: Replace the direct use of x_train with datagen.flow(x_train, y_train, batch_size=32). This will apply your augmentations in real-time during training
-- ##### Use the Validation Set: We already have validation_data=(x_test, y_test).
-- ##### Save the Best Model: We're using a ModelCheckpoint callback to automatically save the model if its performance on the validation set improves
-- ##### Hint: Experiment with different batch sizes as well.
 ## Enhanced Model Training with Data Augmentation
 
 #### This section outlines enhanced model training techniques, including data augmentation and callback implementation.
@@ -320,9 +294,6 @@ history = model.fit(
 )
 ````
 
-#### Visualizing Training Progress
-- ##### Importance of Monitoring: Explain why tracking validation metrics helps identify overfitting or underfitting.
-- ##### Plot training and validation accuracy/loss curves.
 ## Visualizing Training Progress
 
 #### This section focuses on visualizing the training progress of the model by plotting training and validation accuracy/loss curves.
@@ -350,8 +321,6 @@ plt.legend(['train', 'val'], loc='upper right')
 plt.show()
 ````
 
-#### Evaluation on the Test Set
-- ##### Discuss how test set metrics provide the most unbiased assessment of model performance.
 ## Evaluation on the Test Set
 
 #### This section focuses on evaluating the trained model on the test set and discusses why test set metrics provide an unbiased assessment of model performance.
@@ -367,10 +336,6 @@ print('Test Loss:', test_loss)
 print('Test Accuracy:', test_acc)
 ````
 
-#### Hyperparameter Tuning
-- ##### Exploring Learning Rates: In the provided code, we're iterating through different learning rates.
-- ##### Hint 1: A good starting range for the learning rate is often between 0.01 and 0.0001.
-- ##### Hint 2: Pay close attention to how quickly the validation loss starts to increase (if it does), which might signal a learning rate that's too high.
 ## Target Label Shape Analysis
 
 #### This section provides an analysis of the shape of target labels (`y_train` and `y_test`) before training.
@@ -494,7 +459,6 @@ plot_curves(history, lr)
 evaluate_model(model, x_test, y_test_encoded)
 ````
 
-## Confusion Matrix
 ## Confusion Matrix and Classification Report
 
 #### This code section involves generating and visualizing the confusion matrix, as well as calculating the classification report.
@@ -522,7 +486,6 @@ print("Classification Report:")
 print(class_report)
 ````
 
-## Finally, evaluate the model on testing data.
 ## Model Evaluation on Test Data
 
 #### This code section evaluates the trained model on the testing data and prints out the test loss and accuracy.
